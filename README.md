@@ -4,7 +4,8 @@ A high-performance, secure, and modern Single Page Application (SPA) for movie t
 
 ---
 
-https://github.com/user-attachments/assets/3c24e05b-97a7-4d80-a277-d1fe0ffce629
+
+https://github.com/user-attachments/assets/56efeec7-c123-4343-a1ed-50b829c2d51c
 
 
 
