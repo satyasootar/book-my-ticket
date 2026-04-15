@@ -4,6 +4,10 @@ A high-performance, secure, and modern Single Page Application (SPA) for movie t
 
 ---
 
+https://github.com/user-attachments/assets/3c24e05b-97a7-4d80-a277-d1fe0ffce629
+
+
+
 ## 🚀 Features
 
 - **Standardized Auth**: Secure User Registration and Login using JWT and BCrypt password hashing.
