@@ -1,15 +1,17 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import pool from "../db/index.js";
+import { registerSchema, loginSchema } from "../dtos/authDto.js";
 
 const SECRET_KEY = process.env.JWT_SECRET || "fallback_secret_for_local_dev";
 
 export const register = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.status(400).json({ error: "Email and password are required" });
+    const { error } = registerSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
     }
+    const { email, password } = req.body;
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -31,10 +33,11 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.status(400).json({ error: "Email and password are required" });
+    const { error } = loginSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
     }
+    const { email, password } = req.body;
 
     const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
     if (result.rows.length === 0) {

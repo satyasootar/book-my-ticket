@@ -92,13 +92,24 @@
             Continue
           </button>
         </form>
+
+        <div id="auth-error-toast" aria-live="polite" class="mt-4 text-sm font-medium text-center text-red-500 hidden-view"></div>
         
         <div class="mt-6 pt-6 border-t border-gray-800 flex justify-between items-center text-sm">
           <span id="auth-toggle-text" class="text-gray-400">Need an account?</span> 
-          <button onclick="toggleAuthMode()" class="text-white font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-900 rounded px-1 -mr-1">Create Account</button>
+          <button id="auth-toggle-btn" onclick="toggleAuthMode()" class="text-white font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-900 rounded px-1 -mr-1">Create Account</button>
         </div>
         
-        <button onclick="closeAuthModal()" class="w-full mt-4 text-gray-400 hover:text-white text-sm py-2 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-900 rounded transition-colors">
+        <div class="relative group mt-2">
+          <button onclick="quickLogin()" class="w-full bg-gray-800 text-white font-semibold rounded-lg py-2.5 hover:bg-gray-700 transition-colors">
+            Demo Login
+          </button>
+          <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-gray-800 text-xs text-gray-200 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-gray-700 shadow-xl z-50">
+            Email: <span class="text-white">satya@gmail.com</span> | Pass: <span class="text-white">Satya@123454</span>
+          </div>
+        </div>
+
+        <button onclick="closeAuthModal()" class="w-full mt-2 text-gray-400 hover:text-white text-sm py-2 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-900 rounded transition-colors">
           Cancel
         </button>
       </div>
@@ -188,15 +199,25 @@
       function closeAuthModal() {
         document.getElementById("auth-modal").classList.add("hidden-view");
         document.getElementById("auth-form").reset();
+        document.getElementById("auth-error-toast").classList.add("hidden-view");
         pendingSeatIdForAuth = null;
         activeRelativeSeatNumber = null;
       }
 
+      function quickLogin() {
+        if (isRegisterMode) toggleAuthMode();
+        document.getElementById("auth-email").value = "dummy@gmail.com";
+        document.getElementById("auth-password").value = "Satya@123454";
+        document.getElementById("auth-form").requestSubmit();
+      }
+
       function toggleAuthMode() {
         isRegisterMode = !isRegisterMode;
+        document.getElementById("auth-error-toast").classList.add("hidden-view");
         document.getElementById("auth-title").innerText = isRegisterMode ? "Create Account" : "Sign In";
         document.getElementById("auth-submit-btn").innerText = isRegisterMode ? "Sign Up" : "Continue";
         document.getElementById("auth-toggle-text").innerText = isRegisterMode ? "Already registered?" : "Need an account?";
+        document.getElementById("auth-toggle-btn").innerText = isRegisterMode ? "Sign In" : "Create Account";
         document.getElementById("auth-password").autocomplete = isRegisterMode ? "new-password" : "current-password";
       }
 
@@ -206,8 +227,10 @@
         const password = document.getElementById("auth-password").value;
         const endpoint = isRegisterMode ? "/register" : "/login";
         const btn = document.getElementById("auth-submit-btn");
+        const toast = document.getElementById("auth-error-toast");
         const originalText = btn.innerText;
 
+        toast.classList.add("hidden-view");
         btn.innerText = "Processing…";
         btn.disabled = true;
 
@@ -233,7 +256,8 @@
             }
           }
         } catch (err) {
-          alert(err.message);
+          toast.innerText = err.message;
+          toast.classList.remove("hidden-view");
         } finally {
           btn.innerText = originalText;
           btn.disabled = false;

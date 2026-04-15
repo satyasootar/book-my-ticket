@@ -1,5 +1,3 @@
-/* Vercel Guidelines compliant Global Styles */
-
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 body {
@@ -10,7 +8,7 @@ body {
 /* Base dark theme settings to prevent unstyled flashes and configure scrollbars natively */
 html {
   color-scheme: dark;
-  background-color: #030712; /* bg-gray-950 */
+  background-color: #151516; 
 }
 
 .hidden-view { 
