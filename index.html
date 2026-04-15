@@ -1,141 +1,432 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="color-scheme: dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stellar Seat Booking</title>
+    <title>ChaiCode Cinema</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap");
-      body {
-        font-family: "Outfit", sans-serif;
-        background-color: #0f172a;
-        color: #f8fafc;
-      }
-    </style>
+    <link rel="stylesheet" href="/style.css" />
   </head>
-  <body
-    class="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
-  >
-    <div
-      class="max-w-7xl w-full bg-slate-800/80 backdrop-blur-xl rounded-3xl shadow-2xl p-10 border border-slate-700/50"
-    >
-      <div class="text-center mb-10">
-        <h1
-          class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 mb-4 tracking-tight"
+  <body class="min-h-screen flex flex-col antialiased bg-gray-950 text-gray-100 selection:bg-gray-700 selection:text-white">
+    
+    <nav class="bg-gray-950/90 border-b border-gray-800 sticky top-0 z-40 backdrop-blur-sm">
+      <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
+        <button 
+          onclick="showView('movies-view')" 
+          class="text-xl font-bold tracking-tight text-white hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-950 rounded"
         >
-          ChaiCode Cinema - Now Showing<br />
-          <br />
-          <span class="text-red-400">
-            <span class="font-bold">Dhurandhar The Revenge</span>
-          </span>
-        </h1>
-        <p class="text-slate-400 text-lg">Jassi ko ghar ki yaad kyu nhi aai?</p>
-      </div>
-
-      <div class="flex justify-center mb-10">
-        <div
-          class="bg-slate-900/50 rounded-full px-6 py-3 border border-slate-700 flex gap-8 items-center"
-        >
-          <div class="flex items-center gap-3">
-            <div
-              class="w-4 h-4 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.6)]"
-            ></div>
-            <span class="text-slate-300 font-medium tracking-wide"
-              >Available</span
-            >
-          </div>
-          <div class="w-px h-6 bg-slate-700"></div>
-          <div class="flex items-center gap-3">
-            <div
-              class="w-4 h-4 rounded-full bg-rose-500/20 border border-rose-500/50"
-            ></div>
-            <span class="text-slate-400 font-medium tracking-wide">Booked</span>
-          </div>
+          ChaiCode Cinema
+        </button>
+        <div id="nav-auth-section" class="flex items-center gap-4 text-sm font-medium">
         </div>
       </div>
+    </nav>
 
-      <div class="flex justify-center">
-        <div
-          class="bg-slate-900/40 p-8 rounded-2xl border border-slate-700/50 shadow-inner"
-        >
-          <table
-            id="tbl"
-            class="border-separate border-spacing-4 mx-auto"
-          ></table>
+    <main aria-label="Main Content" class="flex-grow flex flex-col w-full max-w-7xl mx-auto px-6 py-10">
+      
+      <section id="movies-view" class="w-full">
+        <header class="mb-6 flex justify-between items-center">
+          <h1 class="text-2xl font-bold tracking-tight text-white">Recommended Movies</h1>
+        </header>
+        
+        <div id="movies-grid" class="flex overflow-x-auto pb-6 gap-6 snap-x">
+          <div aria-live="polite" class="text-gray-500">Loading movies…</div>
         </div>
+      </section>
+
+      <section id="seats-view" class="w-full hidden-view">
+        <div class="mb-8 flex items-center justify-between">
+          <button 
+            onclick="showView('movies-view')" 
+            class="text-gray-400 hover:text-white font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-950 rounded px-2 py-1 -ml-2"
+            aria-label="Back to movies"
+          >
+            &larr; Back
+          </button>
+          <h2 id="seats-movie-title" class="text-2xl font-bold tracking-tight text-white">Movie Title</h2>
+        </div>
+        
+        <div class="bg-gray-900 border border-gray-800 shadow-sm rounded-2xl p-6 sm:p-10 flex flex-col items-center">
+          
+          <div class="w-full max-w-xl h-12 border-t-[8px] border-gray-700 rounded-[100%] mb-12 flex justify-center mt-4">
+            <span class="mt-4 text-gray-500 text-xs font-semibold tracking-[0.2em] font-variant-numeric: tabular-nums">CINEMA SCREEN</span>
+          </div>
+
+          <div class="flex flex-wrap justify-center mb-10 gap-x-8 gap-y-4 px-6 py-4 bg-gray-950 rounded-xl border border-gray-800" aria-hidden="true">
+            <div class="flex items-center gap-3">
+              <div class="w-5 h-5 rounded-md bg-gray-800 border border-gray-600"></div>
+              <span class="text-sm font-medium text-gray-300">Available</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-5 h-5 rounded-md border-2 border-dashed border-gray-600 bg-gray-900"></div>
+              <span class="text-sm font-medium text-gray-300">Locked</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-5 h-5 rounded-md bg-gray-950 border border-gray-900"></div>
+              <span class="text-sm font-medium text-gray-500">Booked</span>
+            </div>
+          </div>
+
+          <div id="seats-grid" class="grid grid-cols-5 sm:grid-cols-10 gap-2 sm:gap-3 font-variant-numeric: tabular-nums">
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <div id="auth-modal" class="fixed inset-0 bg-gray-950/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 hidden-view" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+      <div class="bg-gray-900 p-8 rounded-2xl w-full max-w-md shadow-2xl border border-gray-800">
+        <h3 id="auth-title" class="text-2xl font-bold text-white mb-6 tracking-tight">Sign In</h3>
+        <p class="text-gray-400 mb-6 text-sm">Please log in to hold and purchase your seat.</p>
+        
+        <form id="auth-form" class="flex flex-col gap-5">
+          <div class="flex flex-col gap-1.5 focus-within:ring-0">
+             <label for="auth-email" class="text-sm font-medium text-gray-300">Email Address</label>
+             <input type="email" id="auth-email" name="email" required autocomplete="email" class="w-full bg-gray-950 border border-gray-700 rounded-lg px-3 py-2 text-white shadow-sm focus-visible:outline-none focus-visible:border-gray-500 focus-visible:ring-1 focus-visible:ring-gray-500 transition-colors placeholder-gray-500" spellcheck="false" placeholder="name@example.com" />
+          </div>
+          <div class="flex flex-col gap-1.5 focus-within:ring-0">
+             <label for="auth-password" class="text-sm font-medium text-gray-300">Password</label>
+             <input type="password" id="auth-password" name="password" required autocomplete="current-password" class="w-full bg-gray-950 border border-gray-700 rounded-lg px-3 py-2 text-white shadow-sm focus-visible:outline-none focus-visible:border-gray-500 focus-visible:ring-1 focus-visible:ring-gray-500 transition-colors placeholder-gray-500" />
+          </div>
+          <button type="submit" id="auth-submit-btn" class="w-full bg-white text-gray-950 font-semibold rounded-lg py-2.5 mt-2 hover:bg-gray-200 active:bg-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-900 transition-colors">
+            Continue
+          </button>
+        </form>
+        
+        <div class="mt-6 pt-6 border-t border-gray-800 flex justify-between items-center text-sm">
+          <span id="auth-toggle-text" class="text-gray-400">Need an account?</span> 
+          <button onclick="toggleAuthMode()" class="text-white font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-900 rounded px-1 -mr-1">Create Account</button>
+        </div>
+        
+        <button onclick="closeAuthModal()" class="w-full mt-4 text-gray-400 hover:text-white text-sm py-2 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-900 rounded transition-colors">
+          Cancel
+        </button>
+      </div>
+    </div>
+
+    <div id="payment-modal" class="fixed inset-0 bg-gray-950/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 hidden-view" role="dialog" aria-modal="true" aria-labelledby="payment-title">
+      <div class="bg-gray-900 p-8 rounded-2xl w-full max-w-sm shadow-2xl border border-gray-800">
+        <h3 id="payment-title" class="text-xl font-bold mb-4 text-white">Secure Checkout</h3>
+        
+        <div class="bg-gray-950 rounded-lg p-5 mb-6 border border-gray-800">
+          <div class="flex justify-between items-center mb-4">
+             <span class="text-sm font-medium text-gray-400">Seat Designation</span>
+             <span class="font-bold text-gray-200 font-variant-numeric: tabular-nums bg-gray-800 px-2 py-0.5 border border-gray-700 rounded" id="pay-seat-number">0</span>
+          </div>
+          <div class="flex justify-between items-center border-t border-gray-800 pt-4 mt-2">
+            <span class="text-sm font-medium text-gray-300">Total Price</span>
+            <span class="font-bold text-white text-xl font-variant-numeric: tabular-nums">₹150</span>
+          </div>
+        </div>
+        
+        <p class="text-sm text-gray-400 mb-6 text-center font-medium">Please complete payment in <span class="font-bold text-gray-200 bg-gray-800 px-1.5 py-0.5 rounded border border-gray-700" id="countdown">02:00</span></p>
+
+        <button onclick="processPayment()" id="pay-btn" class="w-full bg-white text-gray-950 font-semibold py-3 rounded-lg hover:bg-gray-200 active:bg-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-900 transition-colors">
+          Purchase Ticket
+        </button>
+        <button onclick="cancelPayment()" class="w-full mt-3 text-gray-400 hover:text-white font-medium text-sm py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-900 rounded transition-colors">
+          Release Seat
+        </button>
+        <div id="payment-error-toast" aria-live="polite" class="mt-4 text-sm font-medium text-center text-red-500 hidden-view"></div>
       </div>
     </div>
 
     <script>
-      async function run() {
-        const tbl = document.getElementById("tbl");
-        const res = await fetch("/seats");
-        const resarray = await res.json();
-        const j = resarray.sort((a, b) => a.id - b.id);
-        let tr;
-        for (let i = 0; i < j.length; i++) {
-          if (i % 8 === 0) tr = document.createElement("tr");
+      let authToken = localStorage.getItem("token") || null;
+      let authUser = JSON.parse(localStorage.getItem("user")) || null;
+      let isRegisterMode = false;
+      let activeMovieId = null;
+      let pendingSeatIdForAuth = null;
+      let activeSeatLock = null;
+      let countdownTimer = null;
+      
+      let activeRelativeSeatNumber = null;
 
-          const td = document.createElement("td");
+      const API_BASE = "http://localhost:8080/api";
 
-          // Base aesthetic classes - added 'relative group' for tooltip positioning
-          const baseClasses =
-            "w-32 h-32 rounded-2xl text-center align-middle text-2xl font-bold transition-all duration-300 select-none relative group";
+      window.onload = () => {
+        updateNavbar();
+        showView("movies-view");
+        fetchMovies();
+      };
 
-          if (j[i].isbooked) {
-            td.className = `${baseClasses} bg-rose-500/10 text-rose-500/60 border border-rose-500/20 cursor-not-allowed`;
-            td.innerHTML = `
-                    <span class="relative z-10">${j[i].id}</span>
-                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-4 py-2 bg-slate-900 border border-slate-700 text-sm text-slate-300 rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap shadow-2xl z-50 pointer-events-none font-normal shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
-                        Booked by: <span class="font-bold text-white ml-1">${j[i].name}</span>
-                        <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] border-[6px] border-transparent border-t-slate-700"></div>
-                        <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-[2px] border-[5px] border-transparent border-t-slate-900"></div>
-                    </div>
-                `;
-          } else {
-            td.className = `${baseClasses} bg-emerald-500 text-white border-2 border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.3)] cursor-pointer hover:bg-emerald-400 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(16,185,129,0.5)] active:scale-95 active:shadow-[0_0_10px_rgba(16,185,129,0.3)]`;
-            td.innerHTML = `<span class="relative z-10">${j[i].id}</span>`;
-          }
+      async function apiFetch(endpoint, options = {}) {
+        const headers = { "Content-Type": "application/json" };
+        if (authToken) headers["Authorization"] = `Bearer ${authToken}`;
+        
+        const res = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "An error occurred");
+        return data;
+      }
 
-          td.addEventListener("click", async function (e) {
-            const currentTd = e.currentTarget;
-            if (currentTd.classList.contains("cursor-not-allowed")) {
-              return; // Seat is already taken
-            }
+      function showView(viewId) {
+        document.querySelectorAll("main > section").forEach(el => el.classList.add("hidden-view"));
+        document.getElementById(viewId).classList.remove("hidden-view");
+        if (viewId === "movies-view") fetchMovies();
+      }
 
-            try {
-              const id = j[i].id; // Safe from loop closure
-              const name = prompt("Enter your name");
-              if (!name) return;
-
-              const res = await fetch(`/${id}/${name}`, { method: "PUT" });
-              const data = await res.json();
-
-              if (data.error) {
-                alert("FAILED! Couldn't book! already booked.");
-              } else {
-                alert("Booked successfully!");
-                // Visually transition to booked state upon success
-                currentTd.className = `${baseClasses} bg-rose-500/10 text-rose-500/60 border border-rose-500/20 cursor-not-allowed`;
-                currentTd.innerHTML = `
-                            <span class="relative z-10">${id}</span>
-                            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-4 py-2 bg-slate-900 border border-slate-700 text-sm text-slate-300 rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap shadow-2xl z-50 pointer-events-none font-normal shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
-                                Booked by: <span class="font-bold text-white ml-1">${name}</span>
-                                <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] border-[6px] border-transparent border-t-slate-700"></div>
-                                <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-[2px] border-[5px] border-transparent border-t-slate-900"></div>
-                            </div>
-                        `;
-              }
-            } catch (ex) {
-              alert("error booking " + ex);
-            }
-          });
-          tr.appendChild(td);
-          tbl.appendChild(tr);
+      function updateNavbar() {
+        const navSection = document.getElementById("nav-auth-section");
+        if (authToken && authUser) {
+          navSection.innerHTML = `
+            <span class="text-sm font-medium text-gray-300 mr-2">Hello, <span class="text-white">${authUser.email.split('@')[0]}</span></span>
+            <button aria-label="Sign Out" onclick="logout()" class="text-sm font-medium text-gray-400 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-950 rounded px-2 py-1 transition-colors">Sign Out</button>
+          `;
+        } else {
+          navSection.innerHTML = `
+            <button aria-label="Sign In" onclick="openAuthModal()" class="bg-gray-800 text-gray-200 border border-gray-700 font-medium px-4 py-1.5 rounded-md hover:bg-gray-700 hover:text-white active:bg-gray-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-950 transition-colors">Sign In</button>
+          `;
         }
       }
-      run();
+
+      function openAuthModal() {
+        document.getElementById("auth-modal").classList.remove("hidden-view");
+        document.getElementById("auth-email").focus();
+      }
+      
+      function closeAuthModal() {
+        document.getElementById("auth-modal").classList.add("hidden-view");
+        document.getElementById("auth-form").reset();
+        pendingSeatIdForAuth = null;
+        activeRelativeSeatNumber = null;
+      }
+
+      function toggleAuthMode() {
+        isRegisterMode = !isRegisterMode;
+        document.getElementById("auth-title").innerText = isRegisterMode ? "Create Account" : "Sign In";
+        document.getElementById("auth-submit-btn").innerText = isRegisterMode ? "Sign Up" : "Continue";
+        document.getElementById("auth-toggle-text").innerText = isRegisterMode ? "Already registered?" : "Need an account?";
+        document.getElementById("auth-password").autocomplete = isRegisterMode ? "new-password" : "current-password";
+      }
+
+      document.getElementById("auth-form").onsubmit = async (e) => {
+        e.preventDefault();
+        const email = document.getElementById("auth-email").value;
+        const password = document.getElementById("auth-password").value;
+        const endpoint = isRegisterMode ? "/register" : "/login";
+        const btn = document.getElementById("auth-submit-btn");
+        const originalText = btn.innerText;
+
+        btn.innerText = "Processing…";
+        btn.disabled = true;
+
+        try {
+          const data = await apiFetch(endpoint, {
+            method: "POST",
+            body: JSON.stringify({ email, password })
+          });
+
+          if (isRegisterMode) {
+            alert("Account created. You can now sign in.");
+            toggleAuthMode();
+          } else {
+            authToken = data.accessToken;
+            authUser = data.user;
+            localStorage.setItem("token", authToken);
+            localStorage.setItem("user", JSON.stringify(authUser));
+            updateNavbar();
+            closeAuthModal();
+            
+            if (pendingSeatIdForAuth) {
+               initiateBooking(pendingSeatIdForAuth, activeRelativeSeatNumber);
+            }
+          }
+        } catch (err) {
+          alert(err.message);
+        } finally {
+          btn.innerText = originalText;
+          btn.disabled = false;
+        }
+      };
+
+      function logout() {
+        authToken = null;
+        authUser = null;
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        updateNavbar();
+      }
+
+      async function fetchMovies() {
+        try {
+          const movies = await apiFetch("/movies");
+          const grid = document.getElementById("movies-grid");
+          
+          const mockImages = [
+            "/public/image/dhurandhar.webp",
+            "/public/image/bhootbangla.webp",
+            "/public/image/dacoit.webp",
+            "/public/image/projecthailmary.webp",
+            "/public/image/murabi.webp"
+          ];
+          const mockMeta = [
+            { rating: "⭐ 9.4/10", votes: "568K+ Votes", genre: "Action/Thriller" },
+            { rating: "👍 180K+", votes: "Likes", genre: "Comedy/Horror/Thriller" },
+            { rating: "👍 97.6K+", votes: "Likes", genre: "Action/Drama/Romantic" },
+            { rating: "⭐ 9/10", votes: "57.4K+ Votes", genre: "Adventure/Drama/Sci-Fi" },
+            { rating: "⭐ 9.6/10", votes: "Early Ratings", genre: "Comedy/Drama/Family" }
+          ];
+
+          grid.innerHTML = movies.map((m, i) => `
+            <button onclick="selectMovie(${m.id}, '${m.title}')" class="min-w-[200px] w-52 flex-shrink-0 snap-start text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-950 rounded-xl transition-transform hover:-translate-y-1 duration-300">
+              <div class="relative w-full aspect-[2/3] rounded-xl overflow-hidden mb-3 border border-gray-800 shadow-md">
+                 <img src="${mockImages[i % mockImages.length]}" alt="${m.title} Poster" class="w-full h-full object-cover" loading="lazy" />
+                 
+                 <div class="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm px-3 py-1.5 flex justify-between items-center text-xs font-semibold rounded-b-xl border-t border-gray-700/50">
+                    <span class="text-white">${mockMeta[i % mockMeta.length].rating}</span>
+                    <span class="text-gray-300 font-normal">${mockMeta[i % mockMeta.length].votes}</span>
+                 </div>
+              </div>
+              <h3 class="text-base font-bold text-gray-100 truncate w-full px-1 mb-0.5" title="${m.title}">${m.title}</h3>
+              <p class="text-gray-500 text-xs truncate px-1">${mockMeta[i % mockMeta.length].genre}</p>
+            </button>
+          `).join('');
+        } catch {}
+      }
+
+      async function selectMovie(id, title) {
+        activeMovieId = id;
+        document.getElementById("seats-movie-title").innerText = title;
+        showView("seats-view");
+        await fetchSeats(id);
+      }
+
+      async function fetchSeats(movieId) {
+         try {
+           const seats = await apiFetch(`/movies/${movieId}/seats`);
+           const grid = document.getElementById("seats-grid");
+           
+           grid.innerHTML = seats.map((s, index) => {
+             const displayNum = index + 1;
+             
+             let btnClasses = "w-10 h-10 sm:w-12 sm:h-12 border rounded-md text-sm font-semibold flex cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white focus-visible:ring-offset-gray-900 transition-colors items-center justify-center tabular-nums";
+             let ariaLabel = `Seat ${displayNum}`;
+             let disabled = false;
+             
+             if (s.is_unavailable && s.isbooked === 1) { 
+               btnClasses += " bg-gray-950 text-gray-600 border-gray-900 cursor-not-allowed opacity-80";
+               ariaLabel += " Booked";
+               disabled = true;
+             } else if (s.is_locked) {
+               btnClasses += " bg-gray-900 text-gray-600 border-2 border-dashed border-gray-700 cursor-not-allowed";
+               ariaLabel += " Locked currently";
+               disabled = true;
+             } else { 
+               btnClasses += " bg-gray-800 text-gray-300 border-gray-600 hover:border-gray-300 hover:text-white hover:bg-gray-700";
+               ariaLabel += " Available";
+             }
+
+             return `<button 
+                 type="button"
+                 onclick="handleSeatClick(${s.id}, ${displayNum}, ${disabled})" 
+                 aria-label="${ariaLabel}"
+                 class="${btnClasses}"
+                 ${disabled ? 'disabled' : ''}
+              >
+                 ${displayNum}
+              </button>`;
+           }).join('');
+
+         } catch(err) {
+         }
+      }
+
+      async function handleSeatClick(seatId, displayNum, isDisabled) {
+         if (isDisabled) return;
+         if (!authToken) {
+            pendingSeatIdForAuth = seatId;
+            activeRelativeSeatNumber = displayNum;
+            openAuthModal();
+            return;
+         }
+         initiateBooking(seatId, displayNum);
+      }
+
+      async function initiateBooking(seatId, displayNum) {
+         try {
+            await apiFetch(`/book/${seatId}/lock`, { method: "POST" });
+            
+            activeSeatLock = seatId;
+            pendingSeatIdForAuth = null;
+            openPaymentModal(seatId, displayNum);
+            fetchSeats(activeMovieId); 
+
+         } catch (err) {
+            alert(err.message);
+            fetchSeats(activeMovieId);
+         }
+      }
+
+      function openPaymentModal(seatId, displayNum) {
+         const modal = document.getElementById("payment-modal");
+         const toast = document.getElementById("payment-error-toast");
+         toast.classList.add("hidden-view");
+         
+         document.getElementById("pay-seat-number").innerText = displayNum;
+         
+         modal.classList.remove("hidden-view");
+         
+         let secondsLeft = 120;
+         const timerEl = document.getElementById("countdown");
+         
+         clearInterval(countdownTimer);
+         countdownTimer = setInterval(() => {
+           secondsLeft--;
+           if (secondsLeft <= 0) {
+              clearInterval(countdownTimer);
+              cancelPayment();
+              return;
+           }
+           const min = Math.floor(secondsLeft / 60).toString().padStart(2, '0');
+           const sec = (secondsLeft % 60).toString().padStart(2, '0');
+           timerEl.innerText = `${min}:${sec}`;
+         }, 1000);
+      }
+
+      function cancelPayment() {
+         document.getElementById("payment-modal").classList.add("hidden-view");
+         clearInterval(countdownTimer);
+         activeSeatLock = null;
+         activeRelativeSeatNumber = null;
+         fetchSeats(activeMovieId);
+      }
+
+      async function processPayment() {
+         if (!activeSeatLock) return;
+         
+         const btn = document.getElementById("pay-btn");
+         const toast = document.getElementById("payment-error-toast");
+         toast.classList.add("hidden-view");
+         btn.innerText = "Processing…";
+         btn.disabled = true;
+
+         try {
+           await apiFetch("/payment", {
+             method: "POST",
+             body: JSON.stringify({ seatId: activeSeatLock, amount: 150 })
+           });
+
+           await apiFetch(`/book/${activeSeatLock}`, { method: "PUT" });
+           
+           cancelPayment(); 
+           alert("Ticket purchased successfully!");
+
+         } catch (err) {
+           toast.innerText = err.message;
+           toast.classList.remove("hidden-view");
+         } finally {
+           btn.innerText = "Purchase Ticket";
+           btn.disabled = false;
+         }
+      }
+
+      setInterval(() => {
+         if (!document.getElementById("seats-view").classList.contains("hidden-view") && activeMovieId) {
+            fetchSeats(activeMovieId);
+         }
+      }, 5000);
+
     </script>
   </body>
 </html>

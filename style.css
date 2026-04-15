@@ -1,0 +1,24 @@
+/* Vercel Guidelines compliant Global Styles */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+body {
+  font-family: "Inter", -apple-system, system-ui, sans-serif;
+  color: #f3f4f6; /* text-gray-100 */
+}
+
+/* Base dark theme settings to prevent unstyled flashes and configure scrollbars natively */
+html {
+  color-scheme: dark;
+  background-color: #030712; /* bg-gray-950 */
+}
+
+.hidden-view { 
+  display: none !important; 
+}
+
+/* Custom interactive ring configurations */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #111827, 0 0 0 4px #f3f4f6;
+}
