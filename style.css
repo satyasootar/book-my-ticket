@@ -8,7 +8,7 @@ body {
 /* Base dark theme settings to prevent unstyled flashes and configure scrollbars natively */
 html {
   color-scheme: dark;
-  background-color: #151516; 
+  background-color: #000000; 
 }
 
 .hidden-view { 

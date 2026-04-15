@@ -7,13 +7,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/style.css" />
   </head>
-  <body class="min-h-screen flex flex-col antialiased bg-gray-950 text-gray-100 selection:bg-gray-700 selection:text-white">
+  <body class="min-h-screen flex flex-col antialiased bg-black text-gray-100 selection:bg-gray-800 selection:text-white">
     
-    <nav class="bg-gray-950/90 border-b border-gray-800 sticky top-0 z-40 backdrop-blur-sm">
+    <nav class="bg-black/90 border-b border-[#1f1f1f] sticky top-0 z-40 backdrop-blur-sm">
       <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
         <button 
           onclick="showView('movies-view')" 
-          class="text-xl font-bold tracking-tight text-white hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-950 rounded"
+          class="text-xl font-bold tracking-tight text-white hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-black rounded"
         >
           ChaiCode Cinema
         </button>
@@ -38,7 +38,7 @@
         <div class="mb-8 flex items-center justify-between">
           <button 
             onclick="showView('movies-view')" 
-            class="text-gray-400 hover:text-white font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-950 rounded px-2 py-1 -ml-2"
+            class="text-gray-400 hover:text-white font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-black rounded px-2 py-1 -ml-2"
             aria-label="Back to movies"
           >
             &larr; Back
@@ -46,23 +46,23 @@
           <h2 id="seats-movie-title" class="text-2xl font-bold tracking-tight text-white">Movie Title</h2>
         </div>
         
-        <div class="bg-gray-900 border border-gray-800 shadow-sm rounded-2xl p-6 sm:p-10 flex flex-col items-center">
+        <div class="bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm rounded-2xl p-6 sm:p-10 flex flex-col items-center">
           
-          <div class="w-full max-w-xl h-12 border-t-[8px] border-gray-700 rounded-[100%] mb-12 flex justify-center mt-4">
+          <div class="w-full max-w-xl h-12 border-t-[8px] border-[#2a2a2a] rounded-[100%] mb-12 flex justify-center mt-4">
             <span class="mt-4 text-gray-500 text-xs font-semibold tracking-[0.2em] font-variant-numeric: tabular-nums">CINEMA SCREEN</span>
           </div>
 
-          <div class="flex flex-wrap justify-center mb-10 gap-x-8 gap-y-4 px-6 py-4 bg-gray-950 rounded-xl border border-gray-800" aria-hidden="true">
+          <div class="flex flex-wrap justify-center mb-10 gap-x-8 gap-y-4 px-6 py-4 bg-black rounded-xl border border-[#1f1f1f]" aria-hidden="true">
             <div class="flex items-center gap-3">
               <div class="w-5 h-5 rounded-md bg-gray-800 border border-gray-600"></div>
               <span class="text-sm font-medium text-gray-300">Available</span>
             </div>
             <div class="flex items-center gap-3">
-              <div class="w-5 h-5 rounded-md border-2 border-dashed border-gray-600 bg-gray-900"></div>
+              <div class="w-5 h-5 rounded-md border-2 border-dashed border-[#2a2a2a] bg-[#0a0a0a]"></div>
               <span class="text-sm font-medium text-gray-300">Locked</span>
             </div>
             <div class="flex items-center gap-3">
-              <div class="w-5 h-5 rounded-md bg-gray-950 border border-gray-900"></div>
+              <div class="w-5 h-5 rounded-md bg-black border border-[#1f1f1f]"></div>
               <span class="text-sm font-medium text-gray-500">Booked</span>
             </div>
           </div>
@@ -74,68 +74,68 @@
 
     </main>
 
-    <div id="auth-modal" class="fixed inset-0 bg-gray-950/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 hidden-view" role="dialog" aria-modal="true" aria-labelledby="auth-title">
-      <div class="bg-gray-900 p-8 rounded-2xl w-full max-w-md shadow-2xl border border-gray-800">
+    <div id="auth-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 hidden-view" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+      <div class="bg-[#0a0a0a] p-8 rounded-2xl w-full max-w-md shadow-2xl border border-[#1f1f1f]">
         <h3 id="auth-title" class="text-2xl font-bold text-white mb-6 tracking-tight">Sign In</h3>
         <p class="text-gray-400 mb-6 text-sm">Please log in to hold and purchase your seat.</p>
         
         <form id="auth-form" class="flex flex-col gap-5">
           <div class="flex flex-col gap-1.5 focus-within:ring-0">
              <label for="auth-email" class="text-sm font-medium text-gray-300">Email Address</label>
-             <input type="email" id="auth-email" name="email" required autocomplete="email" class="w-full bg-gray-950 border border-gray-700 rounded-lg px-3 py-2 text-white shadow-sm focus-visible:outline-none focus-visible:border-gray-500 focus-visible:ring-1 focus-visible:ring-gray-500 transition-colors placeholder-gray-500" spellcheck="false" placeholder="name@example.com" />
+             <input type="email" id="auth-email" name="email" required autocomplete="email" class="w-full bg-black border border-[#2a2a2a] rounded-lg px-3 py-2 text-white shadow-sm focus-visible:outline-none focus-visible:border-gray-500 focus-visible:ring-1 focus-visible:ring-gray-500 transition-colors placeholder-gray-500" spellcheck="false" placeholder="name@example.com" />
           </div>
           <div class="flex flex-col gap-1.5 focus-within:ring-0">
              <label for="auth-password" class="text-sm font-medium text-gray-300">Password</label>
-             <input type="password" id="auth-password" name="password" required autocomplete="current-password" class="w-full bg-gray-950 border border-gray-700 rounded-lg px-3 py-2 text-white shadow-sm focus-visible:outline-none focus-visible:border-gray-500 focus-visible:ring-1 focus-visible:ring-gray-500 transition-colors placeholder-gray-500" />
+             <input type="password" id="auth-password" name="password" required autocomplete="current-password" class="w-full bg-black border border-[#2a2a2a] rounded-lg px-3 py-2 text-white shadow-sm focus-visible:outline-none focus-visible:border-gray-500 focus-visible:ring-1 focus-visible:ring-gray-500 transition-colors placeholder-gray-500" />
           </div>
-          <button type="submit" id="auth-submit-btn" class="w-full bg-white text-gray-950 font-semibold rounded-lg py-2.5 mt-2 hover:bg-gray-200 active:bg-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-900 transition-colors">
+          <button type="submit" id="auth-submit-btn" class="w-full bg-white text-black font-semibold rounded-lg py-2.5 mt-2 hover:bg-gray-200 active:bg-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-black transition-colors">
             Continue
           </button>
         </form>
 
         <div id="auth-error-toast" aria-live="polite" class="mt-4 text-sm font-medium text-center text-red-500 hidden-view"></div>
         
-        <div class="mt-6 pt-6 border-t border-gray-800 flex justify-between items-center text-sm">
+        <div class="mt-6 pt-6 border-t border-[#1f1f1f] flex justify-between items-center text-sm">
           <span id="auth-toggle-text" class="text-gray-400">Need an account?</span> 
-          <button id="auth-toggle-btn" onclick="toggleAuthMode()" class="text-white font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-900 rounded px-1 -mr-1">Create Account</button>
+          <button id="auth-toggle-btn" onclick="toggleAuthMode()" class="text-white font-semibold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-black rounded px-1 -mr-1">Create Account</button>
         </div>
         
         <div class="relative group mt-2">
-          <button onclick="quickLogin()" class="w-full bg-gray-800 text-white font-semibold rounded-lg py-2.5 hover:bg-gray-700 transition-colors">
+          <button onclick="quickLogin()" class="w-full bg-[#1a1a1a] text-white font-semibold rounded-lg py-2.5 hover:bg-[#252525] transition-colors">
             Demo Login
           </button>
-          <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-gray-800 text-xs text-gray-200 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-gray-700 shadow-xl z-50">
+          <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#1a1a1a] text-xs text-gray-200 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-[#2a2a2a] shadow-xl z-50">
             Email: <span class="text-white">satya@gmail.com</span> | Pass: <span class="text-white">Satya@123454</span>
           </div>
         </div>
 
-        <button onclick="closeAuthModal()" class="w-full mt-2 text-gray-400 hover:text-white text-sm py-2 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-900 rounded transition-colors">
+        <button onclick="closeAuthModal()" class="w-full mt-2 text-gray-400 hover:text-white text-sm py-2 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-black rounded transition-colors">
           Cancel
         </button>
       </div>
     </div>
 
-    <div id="payment-modal" class="fixed inset-0 bg-gray-950/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 hidden-view" role="dialog" aria-modal="true" aria-labelledby="payment-title">
-      <div class="bg-gray-900 p-8 rounded-2xl w-full max-w-sm shadow-2xl border border-gray-800">
+    <div id="payment-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 hidden-view" role="dialog" aria-modal="true" aria-labelledby="payment-title">
+      <div class="bg-[#0a0a0a] p-8 rounded-2xl w-full max-w-sm shadow-2xl border border-[#1f1f1f]">
         <h3 id="payment-title" class="text-xl font-bold mb-4 text-white">Secure Checkout</h3>
         
-        <div class="bg-gray-950 rounded-lg p-5 mb-6 border border-gray-800">
+        <div class="bg-black rounded-lg p-5 mb-6 border border-[#1f1f1f]">
           <div class="flex justify-between items-center mb-4">
              <span class="text-sm font-medium text-gray-400">Seat Designation</span>
-             <span class="font-bold text-gray-200 font-variant-numeric: tabular-nums bg-gray-800 px-2 py-0.5 border border-gray-700 rounded" id="pay-seat-number">0</span>
+             <span class="font-bold text-gray-200 font-variant-numeric: tabular-nums bg-[#1a1a1a] px-2 py-0.5 border border-[#2a2a2a] rounded" id="pay-seat-number">0</span>
           </div>
-          <div class="flex justify-between items-center border-t border-gray-800 pt-4 mt-2">
+          <div class="flex justify-between items-center border-t border-[#1f1f1f] pt-4 mt-2">
             <span class="text-sm font-medium text-gray-300">Total Price</span>
             <span class="font-bold text-white text-xl font-variant-numeric: tabular-nums">₹150</span>
           </div>
         </div>
         
-        <p class="text-sm text-gray-400 mb-6 text-center font-medium">Please complete payment in <span class="font-bold text-gray-200 bg-gray-800 px-1.5 py-0.5 rounded border border-gray-700" id="countdown">02:00</span></p>
+        <p class="text-sm text-gray-400 mb-6 text-center font-medium">Please complete payment in <span class="font-bold text-gray-200 bg-[#1a1a1a] px-1.5 py-0.5 rounded border border-[#2a2a2a]" id="countdown">02:00</span></p>
 
-        <button onclick="processPayment()" id="pay-btn" class="w-full bg-white text-gray-950 font-semibold py-3 rounded-lg hover:bg-gray-200 active:bg-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-900 transition-colors">
+        <button onclick="processPayment()" id="pay-btn" class="w-full bg-white text-gray-950 font-semibold py-3 rounded-lg hover:bg-gray-200 active:bg-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-black transition-colors">
           Purchase Ticket
         </button>
-        <button onclick="cancelPayment()" class="w-full mt-3 text-gray-400 hover:text-white font-medium text-sm py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-gray-900 rounded transition-colors">
+        <button onclick="cancelPayment()" class="w-full mt-3 text-gray-400 hover:text-white font-medium text-sm py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-300 focus-visible:ring-offset-black rounded transition-colors">
           Release Seat
         </button>
         <div id="payment-error-toast" aria-live="polite" class="mt-4 text-sm font-medium text-center text-red-500 hidden-view"></div>
@@ -408,7 +408,14 @@
          }, 1000);
       }
 
-      function cancelPayment() {
+      async function cancelPayment() {
+         if (activeSeatLock) {
+            try {
+               await apiFetch(`/book/${activeSeatLock}/unlock`, { method: "POST" });
+            } catch (err) {
+               console.error("Failed to unlock seat:", err);
+            }
+         }
          document.getElementById("payment-modal").classList.add("hidden-view");
          clearInterval(countdownTimer);
          activeSeatLock = null;
